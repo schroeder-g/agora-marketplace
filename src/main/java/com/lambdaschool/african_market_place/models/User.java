@@ -42,13 +42,11 @@ public class User
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    /**
-     * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
-     */
-    @Column(nullable = false,
-            unique = true)
-    @Email
-    private String primaryemail;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+//    @JoinColumn(name = "listingid")
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Set<Listing> listings = new HashSet<>();
 
     /**
      * A list of emails for this user
@@ -77,16 +75,13 @@ public class User
      *
      * @param username     The username (String) of the user
      * @param password     The password (String) of the user
-     * @param primaryemail The primary email (String) of the user
      */
     public User(
             String username,
-            String password,
-            String primaryemail)
+            String password)
     {
         setUsername(username);
         setPassword(password);
-        this.primaryemail = primaryemail;
     }
 
     /**
@@ -129,25 +124,6 @@ public class User
         this.username = username.toLowerCase();
     }
 
-    /**
-     * getter for primary email
-     *
-     * @return the primary email (String) for the user converted to lowercase
-     */
-    public String getPrimaryemail()
-    {
-        return primaryemail;
-    }
-
-    /**
-     * setter for primary email
-     *
-     * @param primaryemail the new primary email (String) for the user converted to lowercase
-     */
-    public void setPrimaryemail(String primaryemail)
-    {
-        this.primaryemail = primaryemail.toLowerCase();
-    }
 
     /**
      * Getter for the password
@@ -218,5 +194,13 @@ public class User
         }
 
         return rtnList;
+    }
+
+    public Set<Listing> getListings() {
+        return listings;
+    }
+
+    public void setListings(Set<Listing> listings) {
+        this.listings = listings;
     }
 }
