@@ -81,6 +81,4 @@ public class ListingController {
         listservice.delete(listingid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }

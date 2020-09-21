@@ -80,10 +80,10 @@ public class SeedData implements CommandLineRunner
 //        vendor.getListings().add(new Listing("New listing", "Listing description", 6.99, 14, vendor));
 //        vendor.getListings().add(new Listing("New listinggg", "Listing descriptionnnn", 6.50, 14, vendor));
         vendor = userService.save(vendor);
-        Listing l1 = new Listing("New listingasdf", "Listing description", 6.99, 14, admin);
+        Listing l1 = new Listing("New listingasdf", "Listing description", 6.99, 14, "food", admin);
 //        listingService.save(l1);
         admin.getListings().add(l1);
-        Listing l2 = new Listing("New listingasdfasdfasf", "Listing description", 6.99, 14, admin);
+        Listing l2 = new Listing("New listingasdfasdfasf", "Listing description", 6.99, 14, "other food",admin);
 //        listingService.save(l2);
         admin.getListings().add(l2);
 

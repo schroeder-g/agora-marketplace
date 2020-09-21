@@ -48,18 +48,21 @@ public class User
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<Listing> listings = new HashSet<>();
 
-    /**
-     * A list of emails for this user
-     */
-    /**
-     * Part of the join relationship between user and role
-     * connects users to the user role combination
-     */
+
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
+
+    private String phonenumber;
+
+    private String email;
+
+    private String fname;
+
+    private String lname;
+
 
     /**
      * Default constructor used primarily by the JPA.
@@ -202,5 +205,37 @@ public class User
 
     public void setListings(Set<Listing> listings) {
         this.listings = listings;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 }

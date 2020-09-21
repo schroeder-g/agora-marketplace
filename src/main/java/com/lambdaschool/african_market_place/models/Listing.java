@@ -24,6 +24,8 @@ public class Listing extends Auditable{
     private boolean available = true;
 
     private int quantity;
+
+    private String category;
 //
 //    @Id
     @ManyToOne
@@ -34,11 +36,12 @@ public class Listing extends Auditable{
     public Listing() {
     }
 
-    public Listing(String listingname, String description, double price, int quantity, User user) {
+    public Listing(String listingname, String description, double price, int quantity, String category, User user) {
         this.listingname = listingname;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+        this.category = category;
         this.user = user;
     }
 
@@ -104,5 +107,13 @@ public class Listing extends Auditable{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
         hasvalueforquantity = true;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
