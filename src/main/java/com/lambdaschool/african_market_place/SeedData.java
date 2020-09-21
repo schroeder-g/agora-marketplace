@@ -62,7 +62,7 @@ public class SeedData implements CommandLineRunner
         roleService.deleteAll();
         Role r1 = new Role("admin");
         Role r2 = new Role("user");
-        Role r3 = new Role("merchent");
+        Role r3 = new Role("merchant");
 
         r1 = roleService.save(r1);
         r2 = roleService.save(r2);

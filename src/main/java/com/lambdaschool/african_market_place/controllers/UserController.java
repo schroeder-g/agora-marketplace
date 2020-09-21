@@ -43,7 +43,6 @@ public class UserController
         return new ResponseEntity<>(myUsers,
                                     HttpStatus.OK);
     }
-
     /**
      * Returns a single user based off a user id number
      * <br>Example: http://localhost:2019/users/user/7
@@ -62,7 +61,6 @@ public class UserController
         return new ResponseEntity<>(u,
                                     HttpStatus.OK);
     }
-
     /**
      * Return a user object based on a given username
      * <br>Example: <a href="http://localhost:2019/users/user/name/cinnamon">http://localhost:2019/users/user/name/cinnamon</a>
@@ -81,7 +79,6 @@ public class UserController
         return new ResponseEntity<>(u,
                                     HttpStatus.OK);
     }
-
     /**
      * Returns a list of users whose username contains the given substring
      * <br>Example: <a href="http://localhost:2019/users/user/name/like/da">http://localhost:2019/users/user/name/like/da</a>
@@ -100,7 +97,6 @@ public class UserController
         return new ResponseEntity<>(u,
                                     HttpStatus.OK);
     }
-
     /**
      * Given a complete User Object, create a new User record and accompanying useremail records
      * and user role records.
@@ -112,7 +108,7 @@ public class UserController
      * @throws URISyntaxException Exception if something does not work in creating the location header
      * @see UserService#save(User) UserService.save(User)
      */
-    @PostMapping(value = "/user",
+    @PostMapping(value = "/register",
             consumes = "application/json")
     public ResponseEntity<?> addNewUser(
             @Valid
@@ -136,6 +132,7 @@ public class UserController
                                     HttpStatus.CREATED);
     }
 
+    //Create login post
     /**
      * Given a complete User Object
      * Given the user id, primary key, is in the User table,
