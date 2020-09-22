@@ -6,9 +6,9 @@ public class UserMinimum {
 
     private String password;
 
-    private String firstname;
-
-    private String lastname;
+//    private String firstname;
+//
+//    private String lastname;
 
     public String getUsername() {
         return username;
@@ -26,19 +26,29 @@ public class UserMinimum {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
+//    public String getFirstname() {
+//        return firstname;
+//    }
+//
+//    public void setFirstname(String firstname) {
+//        this.firstname = firstname;
+//    }
+//
+//    public String getLastname() {
+//        return lastname;
+//    }
+//
+//    public void setLastname(String lastname) {
+//        this.lastname = lastname;
+//    }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    @Override
+    public String toString() {
+        return "UserMinimum{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+//                ", firstname='" + firstname + '\'' +
+//                ", lastname='" + lastname + '\'' +
+                '}';
     }
 }
