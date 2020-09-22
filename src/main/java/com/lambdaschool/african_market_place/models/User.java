@@ -71,11 +71,20 @@ public class User
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<Order> orders = new HashSet<>();
 
+
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
+
+    private String phonenumber;
+
+    private String email;
+
+    private String fname;
+
+    private String lname;
 
 
     /**
@@ -273,3 +282,4 @@ public class User
 
     //#endregion
 }
+

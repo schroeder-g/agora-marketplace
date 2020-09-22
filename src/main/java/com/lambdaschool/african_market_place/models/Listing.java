@@ -26,7 +26,7 @@ public class Listing extends Auditable{
     private int quantity;
 
     private String category;
-    //
+
 //    @Id
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
