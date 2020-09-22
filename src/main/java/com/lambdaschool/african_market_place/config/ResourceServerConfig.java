@@ -51,10 +51,11 @@ public class ResourceServerConfig
                         "/swagger-ui.html",
                         "/v2/api-docs",
                         "/webjars/**",
-                        "/createnewuser")
+                        "/createnewuser",
+                        "/users/**")
 //                        "/**") // permits all while testing and building
                 .permitAll()
-                .antMatchers("/users/**",
+                .antMatchers(
                         "/listings/**",
                         "/oauth/revoke-token",
                         "/logout")
