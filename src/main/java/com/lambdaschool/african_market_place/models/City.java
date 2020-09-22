@@ -19,6 +19,9 @@ public class City {
     @JsonIgnoreProperties(value = "cities", allowSetters = true)
     private Country country;
 
+    @Column(nullable = false)
+    private String cityname;
+
     @OneToMany(mappedBy = "city",
                 cascade = CascadeType.ALL,
                 orphanRemoval = true)
@@ -28,9 +31,9 @@ public class City {
     public City() {
     }
 
-    public City(Country country, Set<Location> locations) {
+    public City(Country country, String cityname) {
         this.country = country;
-        this.locations = locations;
+        this.cityname = cityname;
     }
 
     //#endregion
@@ -61,7 +64,13 @@ public class City {
         this.locations = locations;
     }
 
+    public String getCityname() {
+        return cityname;
+    }
 
+    public void setCityname(String cityname) {
+        this.cityname = cityname;
+    }
     //#endregion
 
 }

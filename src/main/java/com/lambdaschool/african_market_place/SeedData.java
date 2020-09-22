@@ -1,13 +1,9 @@
 package com.lambdaschool.african_market_place;
 
 // import com.github.javafaker.Faker;
-import com.lambdaschool.african_market_place.models.Listing;
-import com.lambdaschool.african_market_place.models.Role;
-import com.lambdaschool.african_market_place.models.User;
-import com.lambdaschool.african_market_place.models.UserRoles;
-import com.lambdaschool.african_market_place.services.ListingService;
-import com.lambdaschool.african_market_place.services.RoleService;
-import com.lambdaschool.african_market_place.services.UserService;
+import com.lambdaschool.african_market_place.models.*;
+import com.lambdaschool.african_market_place.repositories.CityRepository;
+import com.lambdaschool.african_market_place.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -38,6 +34,20 @@ public class SeedData implements CommandLineRunner
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private LocationService locationService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private CityService cityService;
+
+    @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
+    private CountryService countryService;
 
     /**
      * A Random generator is needed to randomly generate faker data.
@@ -60,34 +70,60 @@ public class SeedData implements CommandLineRunner
         listingService.deleteAllListings();
         userService.deleteAll();
         roleService.deleteAll();
+
+        /** ROLES */
+
         Role r1 = new Role("admin");
         Role r2 = new Role("user");
         Role r3 = new Role("merchant");
-
         r1 = roleService.save(r1);
         r2 = roleService.save(r2);
         r3 = roleService.save(r3);
 
 
-       User admin = new User("username", "password");
-//        admin.getListings().add(new Listing("New listingasdf", "Listing description", 6.99, true, 14, admin));
+        /**COUNTRIES */
+        Country country1 = new Country("Rwanda");
+        /** CITIES */
+        //Country country,
+        City c1 = new City(country1, "Wakanda");
+        country1.getCities().add(c1);
+        country1 = countryService.save(country1);
+        c1 = cityService.save(c1);
+
+
+//        City c2 = new City(country1, "My City");
+//        country1.getCities().add(c2);
+//        c2 = cityService.save(c2);
+
+
+        /** LOCATIONS */
+        //City city, String zip, String address
+        Location loc1 = new Location(c1,"123 Example St.", "12345");
+        loc1 = locationService.save(loc1);
+//        c1.getLocations().add(loc1);
+
+/**       String username, String phonenumber, String email, String fname,
+ *          String lname, String password, Location location */
+       User admin = new User("username", null, null, null, null, "password", loc1 );
+       /** String listingname, String description, double price, int quantity, String category, User user, String imageurl */
+       admin.getListings().add(new Listing("New listingasdf", "Listing description", 6.99, 14, "more food", admin, "https://pmcvariety.files.wordpress.com/2020/07/kanye-west-1-e1599269208476.jpg"));
 
        admin.getRoles().add(new UserRoles(admin, r1));
        admin = userService.save(admin);
 
-        User vendor = new User("usernamer", "password");
+        User vendor = new User( "usernamer", null, null, null, null, "password", loc1 );
         vendor.getRoles().add(new UserRoles(vendor, r3));
 //        vendor.getListings().add(new Listing("New listing", "Listing description", 6.99, 14, vendor));
 //        vendor.getListings().add(new Listing("New listinggg", "Listing descriptionnnn", 6.50, 14, vendor));
         vendor = userService.save(vendor);
-        Listing l1 = new Listing("New listingasdf", "Listing description", 6.99, 14, "food", admin);
+        Listing l1 = new Listing("Eggs Benedict", "Listing description", 6.99, 14, "food", admin, "https://pmcvariety.files.wordpress.com/2020/07/kanye-west-1-e1599269208476.jpg");
 //        listingService.save(l1);
         admin.getListings().add(l1);
-        Listing l2 = new Listing("New listingasdfasdfasf", "Listing description", 6.99, 14, "other food",admin);
+        Listing l2 = new Listing("Beef Stew", "Listing description", 6.99, 14, "other food",admin, "https://pmcvariety.files.wordpress.com/2020/07/kanye-west-1-e1599269208476.jpg");
 //        listingService.save(l2);
         admin.getListings().add(l2);
 
-        User user = new User("usernames", "password");
+        User user = new User("ultimateuser", null, null, null, null, "password", loc1 );
         user.getRoles().add(new UserRoles(user, r2));
         user = userService.save(user);
 
