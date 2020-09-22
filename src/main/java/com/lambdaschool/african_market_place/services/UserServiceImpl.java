@@ -98,6 +98,7 @@ public class UserServiceImpl
         newUser.setUsername(user.getUsername()
             .toLowerCase());
         newUser.setPasswordNoEncrypt(user.getPassword());
+        newUser.setLocation(user.getLocation());
 
         newUser.getRoles()
             .clear();
@@ -109,6 +110,8 @@ public class UserServiceImpl
                 .add(new UserRoles(newUser,
                     addRole));
         }
+
+
 
         return userrepos.save(newUser);
     }

@@ -9,5 +9,5 @@ public interface CountryService {
 
     List<Country> findAllCountries();
 
-    Country save(Country country1);
+    Country save(Country country);
 }
