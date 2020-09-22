@@ -1,23 +1,23 @@
 package com.lambdaschool.african_market_place.controllers;
 
-import com.lambdaschool.african_market_place.models.User;
-import com.lambdaschool.african_market_place.models.UserMinimum;
-import com.lambdaschool.african_market_place.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
+        import com.lambdaschool.african_market_place.models.User;
+        import com.lambdaschool.african_market_place.models.UserMinimum;
+        import com.lambdaschool.african_market_place.services.UserService;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.http.*;
+        import org.springframework.util.LinkedMultiValueMap;
+        import org.springframework.util.MultiValueMap;
+        import org.springframework.web.bind.annotation.PostMapping;
+        import org.springframework.web.bind.annotation.RequestBody;
+        import org.springframework.web.bind.annotation.RestController;
+        import org.springframework.web.client.RestTemplate;
+        import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.validation.Valid;
+        import java.net.URI;
+        import java.net.URISyntaxException;
+        import java.util.ArrayList;
+        import java.util.List;
 @RestController
 public class OpenController {
     @Autowired
@@ -35,8 +35,8 @@ public class OpenController {
         createdUser.setUsername(newminuser.getUsername());
         createdUser.setPassword(newminuser.getPassword());
         createdUser.setEmail(newminuser.getEmail());
-        createdUser.setFirstname(newminuser.getFirstname());
-        createdUser.setLastname(newminuser.getLastname());
+        createdUser.setFname(newminuser.getFirstname());
+        createdUser.setLname(newminuser.getLastname());
         //No default Roles need to be added
         createdUser = userService.save(createdUser);
         HttpHeaders responseHeaders = new HttpHeaders();

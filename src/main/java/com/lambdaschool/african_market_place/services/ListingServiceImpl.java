@@ -6,6 +6,7 @@ import com.lambdaschool.african_market_place.repositories.ListingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,19 @@ public class ListingServiceImpl implements ListingService{
         Listing listing = listRepo.findById(listingid)
                 .orElseThrow(() -> new ResourceNotFoundException("Listing " + listingid + " not found!"));
         return listing;
+    }
+
+    @Override
+    public List<Listing> findListingsByUser(long userid) throws
+            EntityNotFoundException
+    {
+        List<Listing> userListings = new ArrayList<>();
+        for (Listing l : userService.findUserById(userid).getListings())
+        {
+            userListings.add(l);
+        }
+
+        return userListings;
     }
 
     @Override

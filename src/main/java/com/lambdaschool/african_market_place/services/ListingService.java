@@ -11,6 +11,8 @@ public interface ListingService {
 
     Listing save(Listing newListing);
 
+    List<Listing> findListingsByUser(long userid);
+
     Listing update(long listingid, Listing updateListing);
 
     void delete(long listingid);
