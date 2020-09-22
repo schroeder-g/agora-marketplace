@@ -11,7 +11,7 @@ public class Location {
     //#region fields/constructors
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long locationcode;
+    private long locationcode;
 
     @ManyToOne
     @JoinColumn(name = "citycode", nullable = false)
@@ -73,6 +73,14 @@ public class Location {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     //#endregion

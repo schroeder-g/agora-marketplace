@@ -1,7 +1,10 @@
 package com.lambdaschool.african_market_place.services;
 
 import com.lambdaschool.african_market_place.exceptions.ResourceNotFoundException;
+import com.lambdaschool.african_market_place.models.User;
 import com.lambdaschool.african_market_place.models.ValidationError;
+import com.lambdaschool.african_market_place.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,8 +19,14 @@ import java.util.List;
 public class HelperFunctionsImpl
         implements HelperFunctions
 {
+
+    @Autowired
+    UserRepository userRepository;
+
     public List<ValidationError> getConstraintViolation(Throwable cause)
     {
+
+
         // Find any data violations that might be associated with the error and report them
         // data validations get wrapped in other exceptions as we work through the Spring
         // exception chain. Hence we have to search the entire Spring Exception Stack
@@ -64,6 +73,18 @@ public class HelperFunctionsImpl
         {
             // stop user is not authorized to make this change so stop the whole process and throw an exception
             throw new ResourceNotFoundException(authentication.getName() + " not authorized to make change");
+        }
+    }
+
+    @Override
+    public User getCurrentUser() {
+        {
+            Authentication authentication = SecurityContextHolder
+                    .getContext()
+                    .getAuthentication();
+
+            String primaryEmail = authentication.getName();
+            return userRepository.findByUsername(authentication.getName());
         }
     }
 

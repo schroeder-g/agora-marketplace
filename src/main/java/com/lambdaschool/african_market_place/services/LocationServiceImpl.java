@@ -32,6 +32,9 @@ public class LocationServiceImpl implements LocationService
     @Autowired
     OrderRepository orderRepository;
 
+    @Autowired
+    UserService userService;
+
     @Override
     public List<Location> getAllLocations() throws
             ResourceNotFoundException
@@ -111,7 +114,27 @@ public class LocationServiceImpl implements LocationService
 
     @Override
     public Location save(Location location) {
-        return null;
+        Location newLocation = new Location();
+
+        if(location.getLocationcode() != 0)
+        {
+            locationRepository.findById(location.getLocationcode())
+                    .orElseThrow(() -> new ResourceNotFoundException("Location " + location.getLocationcode() + " not found!"));
+            newLocation.setLocationcode(location.getLocationcode());
+        }
+
+            newLocation.setAddress(location.getAddress());
+            newLocation.setCity(location.getCity());
+            newLocation.setZip(location.getZip());
+
+            location.getUsers().clear();
+            for (User u : location.getUsers())
+            {
+                User user = userService.findUserById(u.getUserid());
+                newLocation.getUsers().add(user);
+            }
+
+        return locationRepository.save(newLocation);
     }
 
     @Override

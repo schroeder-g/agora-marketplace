@@ -59,7 +59,7 @@ public class User
     private Set<Listing> listings = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "locationcode", nullable = false)
+    @JoinColumn(name = "locationcode")
     @JsonIgnoreProperties(value = "users", allowSetters = true)
     private Location location;
 
@@ -100,12 +100,12 @@ public class User
     }
 
     public User(String username, String phonenumber, String email, String fname, String lname, String password, Location location) {
-        this.username = username;
+        setUsername(username);
         this.phonenumber = phonenumber;
         this.email = email;
         this.fname = fname;
         this.lname = lname;
-        this.password = password;
+        setPassword(password);
         this.location = location;
 
     }

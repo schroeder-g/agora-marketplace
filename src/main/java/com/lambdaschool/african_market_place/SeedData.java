@@ -81,14 +81,23 @@ public class SeedData implements CommandLineRunner
         r3 = roleService.save(r3);
 
 
+
+
         /**COUNTRIES */
         Country country1 = new Country("Rwanda");
+        country1 = countryService.save(country1);
+
+        City c1 = new City(country1, "Wakanda");
+        c1 = cityService.save(c1);
+
+        country1.getCities().add(c1);
+
         /** CITIES */
         //Country country,
-        City c1 = new City(country1, "Wakanda");
-        country1.getCities().add(c1);
-        country1 = countryService.save(country1);
-        c1 = cityService.save(c1);
+//        City c1 = new City(country1, "Wakanda");
+//        country1.getCities().add(c1);
+//        country1 = countryService.save(country1);
+
 
 
 //        City c2 = new City(country1, "My City");
@@ -98,29 +107,26 @@ public class SeedData implements CommandLineRunner
 
         /** LOCATIONS */
         //City city, String zip, String address
-        Location loc1 = new Location(c1,"123 Example St.", "12345");
-        loc1 = locationService.save(loc1);
-//        c1.getLocations().add(loc1);
+        Location loc1 = new Location(c1 ,"123 Example St.", "12345 address");
+//        loc1 = locationService.save(loc1);
+        c1.getLocations().add(loc1);
 
-/**       String username, String phonenumber, String email, String fname,
- *          String lname, String password, Location location */
+
        User admin = new User("username", null, null, null, null, "password", loc1 );
-       /** String listingname, String description, double price, int quantity, String category, User user, String imageurl */
        admin.getListings().add(new Listing("New listingasdf", "Listing description", 6.99, 14, "more food", admin, "https://pmcvariety.files.wordpress.com/2020/07/kanye-west-1-e1599269208476.jpg"));
 
        admin.getRoles().add(new UserRoles(admin, r1));
        admin = userService.save(admin);
 
-        User vendor = new User( "usernamer", null, null, null, null, "password", loc1 );
+        User vendor = new User("usernamer", null, null, null, null, "password", loc1 );
         vendor.getRoles().add(new UserRoles(vendor, r3));
-//        vendor.getListings().add(new Listing("New listing", "Listing description", 6.99, 14, vendor));
-//        vendor.getListings().add(new Listing("New listinggg", "Listing descriptionnnn", 6.50, 14, vendor));
+
         vendor = userService.save(vendor);
         Listing l1 = new Listing("Eggs Benedict", "Listing description", 6.99, 14, "food", admin, "https://pmcvariety.files.wordpress.com/2020/07/kanye-west-1-e1599269208476.jpg");
-//        listingService.save(l1);
+
         admin.getListings().add(l1);
         Listing l2 = new Listing("Beef Stew", "Listing description", 6.99, 14, "other food",admin, "https://pmcvariety.files.wordpress.com/2020/07/kanye-west-1-e1599269208476.jpg");
-//        listingService.save(l2);
+
         admin.getListings().add(l2);
 
         User user = new User("ultimateuser", null, null, null, null, "password", loc1 );

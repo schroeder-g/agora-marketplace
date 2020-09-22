@@ -1,6 +1,7 @@
 package com.lambdaschool.african_market_place.controllers;
 
 import com.lambdaschool.african_market_place.models.Listing;
+import com.lambdaschool.african_market_place.services.HelperFunctions;
 import com.lambdaschool.african_market_place.services.ListingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +21,9 @@ public class ListingController {
 
     @Autowired
     ListingService listservice;
+
+    @Autowired
+    HelperFunctions helperFunctions;
 
     // http://localhost:2020/listings/listings
     @GetMapping(value = "/listings", produces = "application/json")
@@ -43,6 +47,7 @@ public class ListingController {
     public ResponseEntity<?> postNewListing(@Valid @RequestBody Listing newListing)
     {
         newListing.setListingid(0);
+        newListing.setUser(helperFunctions.getCurrentUser());
         newListing = listservice.save(newListing);
 
         // set the location header for the newly created resource

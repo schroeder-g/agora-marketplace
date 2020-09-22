@@ -19,7 +19,7 @@ public class City {
     @JsonIgnoreProperties(value = "cities", allowSetters = true)
     private Country country;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String cityname;
 
     @OneToMany(mappedBy = "city",
@@ -29,6 +29,10 @@ public class City {
     private Set<Location> locations = new HashSet<>();
 
     public City() {
+    }
+
+    public City(String cityname) {
+        this.cityname = cityname;
     }
 
     public City(Country country, String cityname) {
