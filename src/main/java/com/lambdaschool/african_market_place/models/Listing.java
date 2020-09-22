@@ -11,6 +11,8 @@ import java.util.Set;
 @Table(name = "listings")
 public class Listing extends Auditable{
 
+    //#region fields/constructors
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long listingid;
@@ -18,6 +20,8 @@ public class Listing extends Auditable{
     private String listingname;
 
     private String description;
+
+    private String imageurl;
 
     private double price;
 
@@ -33,21 +37,27 @@ public class Listing extends Auditable{
     @JsonIgnoreProperties(value = "listings", allowSetters = true)
     private User user;
 
-    @ManyToMany(mappedBy = "orderitems")
+    @OneToMany(mappedBy = "ordercode",
+               cascade = CascadeType.ALL,
+               orphanRemoval = true)
     private Set<Order> listingOrders;
 
     public Listing() {
     }
 
-    public Listing(String listingname, String description, double price, int quantity, String category, User user) {
+    public Listing(String listingname, String description, double price, int quantity, String category, User user, String imageurl) {
         this.listingname = listingname;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.category = category;
         this.user = user;
+        this.imageurl = imageurl;
     }
 
+    //#endregion
+
+    //#region getters/setters
     public String getListingname() {
         return listingname;
     }
@@ -119,4 +129,37 @@ public class Listing extends Auditable{
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
+    }
+
+    public Set<Order> getListingOrders() {
+        return listingOrders;
+    }
+
+    public void setListingOrders(Set<Order> listingOrders) {
+        this.listingOrders = listingOrders;
+    }
+
+    public boolean isHasvalueforprice() {
+        return hasvalueforprice;
+    }
+
+    public void setHasvalueforprice(boolean hasvalueforprice) {
+        this.hasvalueforprice = hasvalueforprice;
+    }
+
+    public boolean isHasvalueforquantity() {
+        return hasvalueforquantity;
+    }
+
+    public void setHasvalueforquantity(boolean hasvalueforquantity) {
+        this.hasvalueforquantity = hasvalueforquantity;
+    }
+    //#endregion
 }

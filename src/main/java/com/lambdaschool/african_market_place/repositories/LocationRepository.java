@@ -8,7 +8,6 @@ import java.util.List;
 public interface LocationRepository extends CrudRepository<Location, Long> {
     Location findByAddressAndZip(String address, String zip);
 
-    List<Location> findByCity();
+    List<Location> findByCity(Long cityCode);
 
-    List<Location> findByCountry();
 }

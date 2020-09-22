@@ -52,18 +52,16 @@ public class User
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @OneToOne(mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @Column(nullable = false)
-    @JsonIgnoreProperties(value = "user", allowSetters = true)
-    private Location location;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             orphanRemoval = true)
 //    @JoinColumn(name = "listingid")
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<Listing> listings = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "locationcode", nullable = false)
+    @JsonIgnoreProperties(value = "users", allowSetters = true)
+    private Location location;
 
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -77,15 +75,6 @@ public class User
             orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
-
-    private String phonenumber;
-
-    private String email;
-
-    private String fname;
-
-    private String lname;
-
 
     /**
      * Default constructor used primarily by the JPA.
@@ -109,6 +98,18 @@ public class User
         setUsername(username);
         setPassword(password);
     }
+
+    public User(String username, String phonenumber, String email, String fname, String lname, String password, Location location) {
+        this.username = username;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.fname = fname;
+        this.lname = lname;
+        this.password = password;
+        this.location = location;
+
+    }
+
     //#endregion
 
     //#region getters/setters

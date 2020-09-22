@@ -3,6 +3,7 @@ package com.lambdaschool.african_market_place.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity /*** Table of fields ID, City (many to one), & Zipcode */
 @Table(name = "locations")
@@ -23,6 +24,12 @@ public class Location {
 
     @Column(nullable = false)
     private String address;
+
+    @OneToMany(mappedBy = "location",
+                cascade = CascadeType.ALL,
+                orphanRemoval = true)
+    @JsonIgnoreProperties(value = "location", allowSetters = true)
+    private Set<User> users;
 
     public Location() {
     }

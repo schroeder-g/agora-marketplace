@@ -3,24 +3,26 @@ package com.lambdaschool.african_market_place.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "orderitems")
-public class OrderItem {
+public class OrderItem
+        extends Auditable
+        implements Serializable {
 
     //#region fields/constructors
+    @Id
     @ManyToOne
     @JoinColumn(name = "ordercode")
     @JsonIgnoreProperties(value = "order")
     private Order order;
 
-    @ManyToMany
-    @JoinTable(name = "orderitems",
-            joinColumns = @JoinColumn(name="order_code"),
-            inverseJoinColumns = @JoinColumn(name = "listing_code"))
-    private List<Listing> Listings;
+    @ManyToOne
+    @JoinColumn(name = "orderitems")
+    private Listing listing;
 
     @Column(nullable = false)
     private int quantity;
@@ -44,8 +46,8 @@ public class OrderItem {
         this.order = order;
     }
 
-    public void setListings(List<Listing> listings) {
-        Listings = listings;
+    public void setListings(Listing listing) {
+        listing = listing;
     }
 
     public int getQuantity() {
