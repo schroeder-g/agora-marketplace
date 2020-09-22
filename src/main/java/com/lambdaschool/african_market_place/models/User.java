@@ -21,6 +21,7 @@ import java.util.Set;
 public class User
         extends Auditable
 {
+    //#region fields/constructors
     /**
      * The primary key (long) of the users table.
      */
@@ -35,6 +36,15 @@ public class User
             unique = true)
     private String username;
 
+
+    private String phonenumber;
+
+    private String email;
+
+    private String fname;
+
+    private String lname;
+
     /**
      * The password (String) for this user. Cannot be null. Never get displayed
      */
@@ -42,11 +52,24 @@ public class User
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @OneToOne(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @Column(nullable = false)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Location location;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             orphanRemoval = true)
 //    @JoinColumn(name = "listingid")
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<Listing> listings = new HashSet<>();
+
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Set<Order> orders = new HashSet<>();
 
 
     @OneToMany(mappedBy = "user",
@@ -86,7 +109,9 @@ public class User
         setUsername(username);
         setPassword(password);
     }
+    //#endregion
 
+    //#region getters/setters
     /**
      * Getter for userid
      *
@@ -238,4 +263,23 @@ public class User
     public void setLname(String lname) {
         this.lname = lname;
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    //#endregion
 }
+
