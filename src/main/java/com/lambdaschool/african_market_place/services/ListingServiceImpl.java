@@ -2,6 +2,7 @@ package com.lambdaschool.african_market_place.services;
 
 import com.lambdaschool.african_market_place.exceptions.ResourceNotFoundException;
 import com.lambdaschool.african_market_place.models.Listing;
+import com.lambdaschool.african_market_place.models.User;
 import com.lambdaschool.african_market_place.repositories.ListingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class ListingServiceImpl implements ListingService{
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    HelperFunctions helperFunctions;
 
     @Override
     public List<Listing> findAll() {
@@ -70,34 +74,44 @@ public class ListingServiceImpl implements ListingService{
     @Override
     public Listing update(long listingid, Listing listing)
     {
-       Listing currentListing = findById(listingid);
+        User currentUser = findById(listingid).getUser();
 
-        if(listing.getDescription() != null){
-            currentListing.setDescription(listing.getDescription());
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername())) {
+
+            Listing currentListing = findById(listingid);
+
+            if (listing.getDescription() != null) {
+                currentListing.setDescription(listing.getDescription());
+            }
+
+            if (listing.getListingname() != null) {
+                currentListing.setListingname(listing.getListingname());
+            }
+
+            if (listing.getPrice() != 0) {
+                currentListing.setPrice(listing.getPrice());
+            }
+
+            if (listing.getQuantity() != 0) {
+                currentListing.setQuantity(listing.getQuantity());
+            }
+
+            if (listing.getUser() != null) {
+                currentListing.setUser(listing.getUser());
+            }
+
+            return listRepo.save(currentListing);
+        } else {
+            throw new ResourceNotFoundException("This user is not authorized to make change");
         }
-
-        if(listing.getListingname() != null){
-            currentListing.setListingname(listing.getListingname());
-        }
-
-        if(listing.getPrice() != 0){
-            currentListing.setPrice(listing.getPrice());
-        }
-
-        if(listing.getQuantity() != 0){
-            currentListing.setQuantity(listing.getQuantity());
-        }
-
-        if(listing.getUser() != null){
-            currentListing.setUser(listing.getUser());
-        }
-
-        return listRepo.save(currentListing);
     }
 
     @Override
     public void delete(long listingid) {
-        listRepo.deleteById(listingid);
+        User currentUser = findById(listingid).getUser();
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername())) {
+            listRepo.deleteById(listingid);
+        }
     }
 
     @Override

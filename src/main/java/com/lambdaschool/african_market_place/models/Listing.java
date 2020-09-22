@@ -26,15 +26,12 @@ public class Listing extends Auditable{
     private int quantity;
 
     private String category;
-    //
+//
 //    @Id
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
     @JsonIgnoreProperties(value = "listings", allowSetters = true)
     private User user;
-
-    @ManyToMany(mappedBy = "orderitems")
-    private Set<Order> listingOrders;
 
     public Listing() {
     }
