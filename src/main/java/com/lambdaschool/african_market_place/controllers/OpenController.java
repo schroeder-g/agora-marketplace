@@ -34,9 +34,6 @@ public class OpenController {
         createdUser.setUserid(0);
         createdUser.setUsername(newminuser.getUsername());
         createdUser.setPassword(newminuser.getPassword());
-        createdUser.setEmail(newminuser.getEmail());
-        createdUser.setFname(newminuser.getFirstname());
-        createdUser.setLname(newminuser.getLastname());
         //No default Roles need to be added
         createdUser = userService.save(createdUser);
         HttpHeaders responseHeaders = new HttpHeaders();
