@@ -1,5 +1,6 @@
 package com.lambdaschool.african_market_place.services;
 
+import com.lambdaschool.african_market_place.models.User;
 import com.lambdaschool.african_market_place.models.ValidationError;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface HelperFunctions
      * @return true if the user can make the modifications, otherwise an exception is thrown
      */
     boolean isAuthorizedToMakeChange(String username);
+
+    User getCurrentUser();
 }
