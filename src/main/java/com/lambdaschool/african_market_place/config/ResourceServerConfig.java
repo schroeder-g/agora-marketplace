@@ -54,6 +54,13 @@ public class ResourceServerConfig
                         "/createnewuser",
                         "/**") // permits all while testing and building
                 .permitAll()
+                .antMatchers("/users/**",
+                        "/listings/**",
+                        "/oauth/revoke-token",
+                        "/logout")
+                .authenticated()
+                .antMatchers("/roles/**")
+                .hasAnyRole("ADMIN")
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -36,6 +37,7 @@ public class ListingController {
         return new ResponseEntity<>(listing, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MERCHANT')")
     // http://localhost:2020/listings/listing
     @PostMapping(value = "/listing", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> postNewListing(@Valid @RequestBody Listing newListing)
@@ -56,6 +58,7 @@ public class ListingController {
                 HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MERCHANT')")
     // http://localhost:2020/listings/listing/{listingid}
     @PatchMapping(value = "/listing/{listingid}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> editPartListing(@Valid @RequestBody Listing updateListing, @PathVariable long listingid)
@@ -65,6 +68,7 @@ public class ListingController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MERCHANT')")
     // http://localhost:2020/listings/listing/{listingid}
     @PutMapping(value = "/listing/{listingid}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> editEntireListing(@Valid @RequestBody Listing newListing, @PathVariable long listingid)
@@ -74,6 +78,7 @@ public class ListingController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MERCHANT')")
     //http://localhost:2020/listings/listing/{listingid}
     @DeleteMapping(value = "/listing/{listingid}")
     public ResponseEntity<?> deleteListingById(@PathVariable long listingid)

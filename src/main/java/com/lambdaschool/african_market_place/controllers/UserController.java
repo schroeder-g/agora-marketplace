@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -35,6 +36,7 @@ public class UserController
      * @return JSON list of all users with a status of OK
      * @see UserService#findAll() UserService.findAll()
      */
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/users",
             produces = "application/json")
     public ResponseEntity<?> listAllUsers()
@@ -201,6 +203,14 @@ public class UserController
                     long id)
     {
         userService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // delete your own account
+    @DeleteMapping(value = "/user")
+    public ResponseEntity<?> deleteUserSelf(Authentication authentication)
+    {
+        userService.delete(userService.findByName(authentication.getName()).getUserid());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
