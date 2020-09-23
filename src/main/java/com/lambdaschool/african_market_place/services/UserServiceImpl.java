@@ -4,6 +4,7 @@ import com.lambdaschool.african_market_place.exceptions.ResourceNotFoundExceptio
 import com.lambdaschool.african_market_place.models.Role;
 import com.lambdaschool.african_market_place.models.User;
 import com.lambdaschool.african_market_place.models.UserRoles;
+import com.lambdaschool.african_market_place.repositories.RoleRepository;
 import com.lambdaschool.african_market_place.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,9 @@ public class UserServiceImpl
 
     @Autowired
     private HelperFunctions helperFunctions;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     public User findUserById(long id) throws
             ResourceNotFoundException
@@ -99,6 +103,10 @@ public class UserServiceImpl
             .toLowerCase());
         newUser.setPasswordNoEncrypt(user.getPassword());
         newUser.setLocation(user.getLocation());
+        newUser.setPhonenumber(user.getPhonenumber());
+        newUser.setLname(user.getLname());
+        newUser.setFname(user.getFname());
+        newUser.setEmail(user.getEmail());
 
         newUser.getRoles()
             .clear();
@@ -110,7 +118,6 @@ public class UserServiceImpl
                 .add(new UserRoles(newUser,
                     addRole));
         }
-
 
 
         return userrepos.save(newUser);
@@ -154,6 +161,32 @@ public class UserServiceImpl
                 }
             }
 
+            if(user.getEmail() != null)
+            {
+                currentUser.setEmail(user.getEmail());
+            }
+            if(user.getFname() != null)
+            {
+                currentUser.setFname(user.getFname());
+            }
+            if(user.getLname() != null)
+            {
+                currentUser.setLname(user.getLname());
+            }
+            if(user.getPhonenumber() != null)
+            {
+                currentUser.setPhonenumber(user.getPhonenumber());
+            }
+            if(user.getRoles() != null)
+            {
+                for(UserRoles r : user.getRoles())
+                {
+                    Role addRole = roleService.findRoleById(r.getRole().getRoleid());
+                    currentUser.getRoles().add(new UserRoles(currentUser, addRole));
+                }
+            }
+
+
 
             return userrepos.save(currentUser);
         } else
@@ -169,5 +202,13 @@ public class UserServiceImpl
     public void deleteAll()
     {
         userrepos.deleteAll();
+    }
+
+    @Override
+    public User becomeAMerchant(String name) {
+        User u = userrepos.findByUsername(name);
+        Role r = roleRepository.findByNameIgnoreCase("MERCHANT");
+        u.getRoles().add(new UserRoles(u, r));
+        return u;
     }
 }
