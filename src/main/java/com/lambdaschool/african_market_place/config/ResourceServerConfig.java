@@ -59,7 +59,8 @@ public class ResourceServerConfig
                         "/users/**",
                         "/listings/**",
                         "/oauth/revoke-token",
-                        "/logout")
+                        "/logout",
+                        "/orders/**")
                 .authenticated()
                 .antMatchers("/roles/**")
                 .hasAnyRole("ADMIN")
