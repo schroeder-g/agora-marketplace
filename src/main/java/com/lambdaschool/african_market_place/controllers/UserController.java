@@ -1,6 +1,7 @@
 package com.lambdaschool.african_market_place.controllers;
 
 import com.lambdaschool.african_market_place.models.User;
+import com.lambdaschool.african_market_place.services.HelperFunctions;
 import com.lambdaschool.african_market_place.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +29,9 @@ public class UserController
      */
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private HelperFunctions helperFunctions;
 
     /**
      * Returns a list of all users
@@ -229,4 +233,14 @@ public class UserController
         return new ResponseEntity<>(u,
             HttpStatus.OK);
     }
+
+    // users/changerole
+    @PatchMapping(value = "/changerole", produces = "application/json")
+    public ResponseEntity<?> changeRole(Authentication authentication)
+    {
+        User u = userService.becomeAMerchant(authentication.getName());
+        return new ResponseEntity<>(u, HttpStatus.OK);
+    }
+
+
 }
