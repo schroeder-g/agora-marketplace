@@ -35,44 +35,6 @@ public class OpenController {
     Allows anyone to create an account
     Route: http://localhost:5280/register
     */
-//    @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
-//    public ResponseEntity<?> addNewAccount(HttpServletRequest httpServletRequest,
-//                                           @Valid @RequestBody UserMinimum newminuser) throws URISyntaxException {
-//        User createdUser = new User();
-//        createdUser.setUserid(0);
-//        createdUser.setUsername(newminuser.getUsername());
-//        createdUser.setPassword(newminuser.getPassword());
-//        //No default Roles need to be added
-//        createdUser = userService.save(createdUser);
-//        HttpHeaders responseHeaders = new HttpHeaders();
-//        URI createdUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" +
-//                httpServletRequest.getLocalPort() + "/users/{userid}")
-//                .buildAndExpand(createdUser.getUserid())
-//                .toUri();
-//        responseHeaders.setLocation(createdUserURI);
-//        String port = "";
-//        if(httpServletRequest.getServerName().equalsIgnoreCase("localhost")) {
-//            port = ":" + httpServletRequest.getLocalPort();
-//        }
-//        System.out.println(httpServletRequest.getServerName());
-//        String requestURI = "http://" + httpServletRequest.getServerName() + port +"/login";
-//        List<MediaType> acceptableMediaTypes = new ArrayList<>();
-//        acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-//        headers.setAccept(acceptableMediaTypes);
-//        headers.setBasicAuth(System.getenv("lambda-client"), System.getenv("lambda-secret"));
-//        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-//        map.add("grant_type", "password");
-//        map.add("scope", "read write trust");
-//        map.add("username", createdUser.getUsername());
-//        map.add("password", createdUser.getPassword());
-//        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-//        RestTemplate restTemplate = new RestTemplate();
-//        String theToken = restTemplate.postForObject(requestURI, request, String.class);
-//        return new ResponseEntity<>(theToken, responseHeaders, HttpStatus.CREATED);
-//    }
-
         @PostMapping(
                 value = "/createnewuser",
                 consumes = {"application/json"},
@@ -88,11 +50,10 @@ public class OpenController {
                 User newUser = new User();
                 newUser.setUsername(userMinimum.getUsername());
                 newUser.setPassword(userMinimum.getPassword());
-                ;
 
                 // add the default role of user
                 Set<UserRoles> newRoles = new HashSet<>();
-                newRoles.add(new UserRoles(newUser, roleService.findByName("user")));
+                newRoles.add(new UserRoles(newUser, roleService.findByName("USER")));
                 newUser.setRoles(newRoles);
 
                 newUser = userService.save(newUser);
@@ -102,7 +63,7 @@ public class OpenController {
                 HttpHeaders responseHeaders = new HttpHeaders();
                 URI newUserURI = ServletUriComponentsBuilder
                         .fromUriString(
-                                httpServletRequest.getServerName() +
+                                "localhost" +
                                         ":" +
                                         httpServletRequest.getLocalPort() +
                                         "/users/user/{userId}"
@@ -115,8 +76,7 @@ public class OpenController {
                 // To get the access token, surf to the endpoint /login just as if a client had done this.
                 RestTemplate restTemplate = new RestTemplate();
                 String requestURI =
-                        "http://" +
-                                httpServletRequest.getServerName() +
+                       "http://localhost" +
                                 ":" +
                                 httpServletRequest.getLocalPort() +
                                 "/login";
