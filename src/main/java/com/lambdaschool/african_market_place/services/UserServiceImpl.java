@@ -139,28 +139,6 @@ public class UserServiceImpl
                     .toLowerCase());
             }
 
-            if (user.getPassword() != null)
-            {
-                currentUser.setPasswordNoEncrypt(user.getPassword());
-            }
-
-
-            if (user.getRoles()
-                .size() > 0)
-            {
-                currentUser.getRoles()
-                    .clear();
-                for (UserRoles ur : user.getRoles())
-                {
-                    Role addRole = roleService.findRoleById(ur.getRole()
-                        .getRoleid());
-
-                    currentUser.getRoles()
-                        .add(new UserRoles(currentUser,
-                            addRole));
-                }
-            }
-
             if(user.getEmail() != null)
             {
                 currentUser.setEmail(user.getEmail());
@@ -177,14 +155,14 @@ public class UserServiceImpl
             {
                 currentUser.setPhonenumber(user.getPhonenumber());
             }
-            if(user.getRoles() != null)
-            {
-                for(UserRoles r : user.getRoles())
-                {
-                    Role addRole = roleService.findRoleById(r.getRole().getRoleid());
-                    currentUser.getRoles().add(new UserRoles(currentUser, addRole));
-                }
-            }
+//            if(user.getRoles() != null)
+//            {
+//                for(UserRoles r : user.getRoles())
+//                {
+//                    Role addRole = roleService.findRoleById(r.getRole().getRoleid());
+//                    currentUser.getRoles().add(new UserRoles(currentUser, addRole));
+//                }
+//            }
 
 
 
