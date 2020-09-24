@@ -87,30 +87,6 @@ public class LocationServiceImpl implements LocationService
         return cityLocations;
     }
 
-    @Override
-    public List<Location> findLocationByCountryId(Long countryCode) {
-        return null;
-    }
-
-    @Override
-    public List<Location> findLocationByCityName(String name) {
-        return null;
-    }
-
-    @Override
-    public List<Location> findLocationByLikeAddress(String likeAddress) {
-        return null;
-    }
-
-    @Override
-    public List<Location> findLocationByZip(String zip) {
-        return null;
-    }
-
-    @Override
-    public List<City> findCityByCountryName(String countryName) {
-        return null;
-    }
 
     @Override
     public Location save(Location location) {
