@@ -180,11 +180,7 @@ public class UserController
      */
     @PatchMapping(value = "/user/{id}",
             consumes = "application/json")
-    public ResponseEntity<?> updateUser(
-            @RequestBody
-                    User updateUser,
-            @PathVariable
-                    long id)
+    public ResponseEntity<?> updateUser(@RequestBody User updateUser, @PathVariable long id)
     {
         userService.update(updateUser,
                            id);
