@@ -29,20 +29,23 @@ public class Order extends Auditable
     private Set<OrderItem> orderItems;
 
     @ManyToOne
-    @JoinColumn(name = "locationcode", nullable = false)
+    @JoinColumn(name = "locationcode")
     @JsonIgnoreProperties(value = "orders", allowSetters = true)
     private Location location;
 
     public Order() {
     }
 
-    public Order(User user, Set<OrderItem> orderItems, Location location) {
-        this.user = user;
+    public Order(Set<OrderItem> orderItems, Location location) {
         this.orderItems = orderItems;
         this.location = location;
     }
 
-    //#region getters/setters
+    public Order(Location location) {
+        this.location = location;
+    }
+
+//#region getters/setters
 
     public long getOrdercode() {
         return ordercode;

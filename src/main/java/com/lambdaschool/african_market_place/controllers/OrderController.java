@@ -1,20 +1,22 @@
 package com.lambdaschool.african_market_place.controllers;
 
 import com.lambdaschool.african_market_place.models.Order;
+import com.lambdaschool.african_market_place.services.HelperFunctions;
 import com.lambdaschool.african_market_place.services.ListingService;
 import com.lambdaschool.african_market_place.services.OrderService;
 import com.lambdaschool.african_market_place.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,9 @@ public class OrderController
     @Autowired
     ListingService listingService;
 
+    @Autowired
+    HelperFunctions helperFunctions;
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/orders", produces = "application/json")
     public ResponseEntity<?> getAllOrders()
@@ -41,7 +46,7 @@ public class OrderController
 
     }
 
-    @GetMapping(value = "/orders/order/{orderid}", produces = "application/json")
+    @GetMapping(value = "/order/{orderid}", produces = "application/json")
     public ResponseEntity<?> getOrderById(@PathVariable Long orderid)
     {
         Order order = orderService.findOrderById(orderid);
@@ -50,6 +55,23 @@ public class OrderController
     }
 
     //post /orders/order
+    @PostMapping(value = "/order", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> postOrder(@Valid @RequestBody Order newOrder)
+    {
+        newOrder.setOrdercode(0);
+        newOrder.setUser(helperFunctions.getCurrentUser());
+        newOrder = orderService.save(newOrder);
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newOrderURI = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{ordercode}")
+                .buildAndExpand(newOrder.getOrdercode())
+                .toUri();
+        responseHeaders.setLocation(newOrderURI);
+
+
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+    }
 
     //get /orders/orders/:userid
 

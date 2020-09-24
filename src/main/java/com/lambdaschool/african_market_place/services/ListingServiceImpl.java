@@ -66,7 +66,9 @@ public class ListingServiceImpl implements ListingService{
         newListing.setListingname(listing.getListingname());
         newListing.setPrice(listing.getPrice());
         newListing.setQuantity(listing.getQuantity());
+        newListing.setCategory(listing.getCategory());
         newListing.setUser(listing.getUser());
+        newListing.setImageurl(listing.getImageurl());
 
         return listRepo.save(newListing);
     }

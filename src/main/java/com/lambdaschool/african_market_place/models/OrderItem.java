@@ -15,6 +15,9 @@ public class OrderItem
 
     //#region fields/constructors
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderitemid;
+
     @ManyToOne
     @JoinColumn(name = "ordercode")
     @JsonIgnoreProperties(value = "order")
@@ -30,13 +33,28 @@ public class OrderItem
     public OrderItem() {
     }
 
-    public OrderItem(int quantity) {
+    public OrderItem(Order order,Listing listing, int quantity) {
+        this.order = order;
+        this.listing = listing;
         this.quantity = quantity;
     }
 
     //#endregion
 
     //#region getters/setters
+
+
+    public Long getOrderitemid() {
+        return orderitemid;
+    }
+
+    public void setOrderitemid(Long orderitemid) {
+        this.orderitemid = orderitemid;
+    }
+
+    public void setListing(Listing listing) {
+        this.listing = listing;
+    }
 
     public Order getOrder() {
         return order;
@@ -46,8 +64,8 @@ public class OrderItem
         this.order = order;
     }
 
-    public void setListings(Listing listing) {
-        listing = listing;
+    public Listing getListing() {
+        return listing;
     }
 
     public int getQuantity() {

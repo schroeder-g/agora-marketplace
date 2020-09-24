@@ -51,15 +51,22 @@ public class ResourceServerConfig
                         "/swagger-ui.html",
                         "/v2/api-docs",
                         "/webjars/**",
-                        "/createnewuser"
-                      )
-//                        "/**") // permits all while testing and building
+                        "/createnewuser")
                 .permitAll()
-                .antMatchers(
-                        "/users/**",
-                        "/listings/**",
+                .antMatchers(HttpMethod.POST,
+                        "/users/**")
+                .permitAll()
+                .antMatchers(HttpMethod.DELETE,
+                        "/users/**")
+                .hasAnyRole("ADMIN", "USER", "MERCHANT")
+                .antMatchers(HttpMethod.PUT,
+                        "/users/**")
+                .hasAnyRole("ADMIN", "USER", "MERCHANT")
+                .antMatchers("/users/**",
+                        "/useremails/**",
                         "/oauth/revoke-token",
                         "/logout",
+                        "/listings/**",
                         "/orders/**")
                 .authenticated()
                 .antMatchers("/roles/**")
@@ -67,6 +74,7 @@ public class ResourceServerConfig
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());
+
 
         // http.requiresChannel().anyRequest().requiresSecure(); required for https
 

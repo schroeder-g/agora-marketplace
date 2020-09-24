@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -108,8 +109,7 @@ public class UserServiceImpl
         newUser.setFname(user.getFname());
         newUser.setEmail(user.getEmail());
 
-        newUser.getRoles()
-            .clear();
+        newUser.setRoles(new HashSet<>());
         for (UserRoles ur : user.getRoles())
         {
             Role addRole = roleService.findRoleById(ur.getRole()
