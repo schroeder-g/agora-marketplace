@@ -217,6 +217,7 @@ public class SeedData implements CommandLineRunner {
                         u,
                         "https://ca.slack-edge.com/ESZCHB482-W015P677M1T-d9f28327bb26-512");
 
+                u.getRoles().add(new UserRoles(u, r2));
                 newListing = listingService.save(newListing);
 
             }
