@@ -3,6 +3,7 @@ package com.lambdaschool.african_market_place.services;
 import com.lambdaschool.african_market_place.exceptions.ResourceNotFoundException;
 import com.lambdaschool.african_market_place.models.Listing;
 import com.lambdaschool.african_market_place.models.Order;
+import com.lambdaschool.african_market_place.models.OrderItem;
 import com.lambdaschool.african_market_place.models.User;
 import com.lambdaschool.african_market_place.repositories.ListingRepository;
 import com.lambdaschool.african_market_place.repositories.OrderRepository;
@@ -19,6 +20,9 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    OrderService orderService;
 
     @Autowired
     ListingRepository listingRepository;
@@ -70,7 +74,12 @@ public class OrderServiceImpl implements OrderService {
 
         newOrder.setLocation(order.getLocation());
         newOrder.setUser(order.getUser());
-        newOrder.setOrderItems(order.getOrderItems());
+
+        for(OrderItem o : order.getOrderItems())
+        {
+            Order addOrder = orderService.findOrderById(o.getOrder().getOrdercode());
+            newOrder.getOrderItems().add(new OrderItem(addOrder, o.getListing(), o.getQuantity()));
+        }
 
         return orderRepository.save(newOrder);
     }
