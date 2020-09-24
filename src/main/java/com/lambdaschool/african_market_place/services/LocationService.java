@@ -14,20 +14,9 @@ public interface LocationService {
 
     Location findLocationByOrderId(Long orderCode);
 
-    List<Location> findLocationByCityId(Long cityCode);
-
-    List<Location> findLocationByCountryId(Long countryCode);
-
-    List<Location> findLocationByCityName(String name);
-
-    List<Location> findLocationByLikeAddress(String likeAddress);
-
-    List<Location> findLocationByZip(String zip);
-
-    List<City> findCityByCountryName(String countryName);
-
-
     Location save(Location location);
+
+    List<Location> findLocationByCityId(Long cityId);
 
     void deleteLocationById(Long locationCode);
 

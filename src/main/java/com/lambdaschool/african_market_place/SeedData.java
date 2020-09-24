@@ -202,6 +202,140 @@ public class SeedData implements CommandLineRunner {
             }
         }
 
+        List<String> categories = new ArrayList<>();
+        categories.add("Animal Products");
+        categories.add("Beans");
+        categories.add("Cereals - Maize");
+        categories.add("Cereals - Maize");
+        categories.add("Cereals - OtherCereals - Rice");
+        categories.add("Fruits");
+        categories.add("Other");
+        categories.add("Peas");
+        categories.add("Roots & Tubers");
+        categories.add("Seeds & Nuts");
+        categories.add("Vegetables");
+
+        List<String> commodityList = new ArrayList<>();
+
+        commodityList.add("Eggs");
+        commodityList.add("Exotic Eggs");
+        commodityList.add("Local Eggs");
+        commodityList.add("Milk");
+        commodityList.add("Nile Perch");
+        commodityList.add("Processed Honey");
+        commodityList.add("Tilapia");
+        commodityList.add("Unprocessed Honey");
+        commodityList.add("Beef");
+        commodityList.add("Goat Meat");
+        commodityList.add("Pork");
+        commodityList.add("Exotic Chicken");
+        commodityList.add("Local Chicken");
+        commodityList.add("Turkey");
+        commodityList.add("Agwedde Beans");
+        commodityList.add("Beans");
+        commodityList.add("Beans (K132)");
+        commodityList.add("Beans Canadian");
+        commodityList.add("Beans Mwitemania");
+        commodityList.add("Beans Rosecoco");
+        commodityList.add("Black Beans (Dolichos)");
+        commodityList.add("Dolichos (Njahi)");
+        commodityList.add("Green Gram");
+        commodityList.add("Kidney Beans");
+        commodityList.add("Mixed Beans");
+        commodityList.add("Mwezi Moja");
+        commodityList.add("Nambale Beans");
+        commodityList.add("Old Beans");
+        commodityList.add("Red Beans");
+        commodityList.add("Soya Beans");
+        commodityList.add("White Beans");
+        commodityList.add("Yellow Beans");
+        commodityList.add("Dry Maize");
+        commodityList.add("Green Maize");
+        commodityList.add("Maize");
+        commodityList.add("Maize Bran");
+        commodityList.add("Maize Flour");
+        commodityList.add("Barley");
+        commodityList.add("Bulrush Millet");
+        commodityList.add("Finger Millet");
+        commodityList.add( "Millet Flour");
+        commodityList.add("Millet Grain");
+        commodityList.add("Pearl Millet");
+        commodityList.add("White Millet");
+        commodityList.add("Red Sorghum");
+        commodityList.add("Sorghum");
+        commodityList.add("Sorghum Flour");
+        commodityList.add("Sorghum Grain");
+        commodityList.add("White Sorghum");
+        commodityList.add("Wheat");
+        commodityList.add("Wheat Bran");
+        commodityList.add("Wheat Flour");
+        commodityList.add("Imported Rice");
+        commodityList.add("Kahama Rice");
+        commodityList.add("Kayiso Rice");
+        commodityList.add("Kilombero Rice");
+        commodityList.add("Mbeya Rice");
+        commodityList.add("Morogoro Rice");
+        commodityList.add("Paddy Rice");
+        commodityList.add("Rice");
+        commodityList.add("Rice Bran");
+        commodityList.add("Super Rice");
+        commodityList.add("Unprocessed/husked rice");
+        commodityList.add("Upland Rice");
+        commodityList.add("Avocado");
+        commodityList.add("Apple Bananas");
+        commodityList.add("Cavendish (Bogoya)");
+        commodityList.add("Cooking Bananas");
+        commodityList.add("Ripe Bananas");
+        commodityList.add("Passion Fruits");
+        commodityList.add("Lemons");
+        commodityList.add("Limes");
+        commodityList.add("Mangoes Local");
+        commodityList.add("Pawpaw");
+        commodityList.add("Mangoes Ngowe");
+        commodityList.add("Oranges");
+        commodityList.add("Pineapples");
+        commodityList.add("Coffee (Arabica)");
+        commodityList.add("Coffee (Robusta)");
+        commodityList.add("Unprocessed Cotton");
+        commodityList.add("Unprocessed Tea");
+        commodityList.add("Tobacco");
+        commodityList.add("Unprocessed Vanilla");
+        commodityList.add("Chic Pea");
+        commodityList.add("Cowpeas");
+        commodityList.add("Dry Peas");
+        commodityList.add( "Fresh Peas");
+        commodityList.add("Green Peas");
+        commodityList.add( "Peas");
+        commodityList.add("Pigeon Peas");
+        commodityList.add("Cassava Chips");
+        commodityList.add("Cassava Flour");
+        commodityList.add("Cassava Fresh");
+        commodityList.add( "Dry Fermented Cassava");
+        commodityList.add("Sun Dried Cassava");
+        commodityList.add( "Red Irish Potatoes");
+        commodityList.add("Round Potatoes");
+        commodityList.add("Sweet Potatoes");
+        commodityList.add("White Fleshed Sweet Potatoes");
+        commodityList.add("White Irish Potatoes");
+        commodityList.add( "Ground Nuts");
+        commodityList.add("Simsim");
+        commodityList.add("Sunflower Seed");
+        commodityList.add("Sunflower Seed Cake");
+        commodityList.add("Brinjal/Eggplant");
+        commodityList.add("Cabbages");
+        commodityList.add( "Capsicums");
+        commodityList.add("Carrots");
+        commodityList.add("Cauliflower");
+        commodityList.add("Chillies");
+        commodityList.add("Cucumber");
+        commodityList.add("Ginger");
+        commodityList.add("Kales");
+        commodityList.add("Lettuce");
+        commodityList.add("Onions Dry");
+        commodityList.add("Spring Onions");
+        commodityList.add("Tomatoes");
+
+
         List<User> userList = userService.findAll();
         for (User u : userList)
         {
@@ -209,11 +343,11 @@ public class SeedData implements CommandLineRunner {
             int randomListingNumber = random.nextInt(3) + 1; // random number 1 through 3
 
             for (int y = 0; y < randomListingNumber; y++){
-                Listing newListing = new Listing(nameFaker.pokemon().name(),
+                Listing newListing = new Listing(nameFaker.options().nextElement(commodityList),
                         nameFaker.lorem().sentence(),
-                        nameFaker.number().randomDouble(2, 1, 1000),
+                        nameFaker.number().randomDouble(2, 1, 100),
                         nameFaker.number().randomDigitNotZero(),
-                        nameFaker.commerce().material(),
+                        nameFaker.options().nextElement(categories),
                         u,
                         "https://ca.slack-edge.com/ESZCHB482-W015P677M1T-d9f28327bb26-512");
 

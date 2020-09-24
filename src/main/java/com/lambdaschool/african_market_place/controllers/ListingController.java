@@ -15,8 +15,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-@RestController
-@RequestMapping("/listings")
+    @RestController
+    @RequestMapping("/listings")
 public class ListingController {
 
     @Autowired
