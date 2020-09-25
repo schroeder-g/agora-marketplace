@@ -122,11 +122,9 @@ public class SeedData implements CommandLineRunner {
 
         vendor = userService.save(vendor);
         Listing l1 = new Listing("Eggs Benedict", "Listing description", 6.99, 14, "food", admin, "https://pmcvariety.files.wordpress.com/2020/07/kanye-west-1-e1599269208476.jpg");
-
-        admin.getListings().add(l1);
+//        admin.getListings().add(l1);
         Listing l2 = new Listing("Beef Stew", "Listing description", 6.99, 14, "other food", admin, "https://pmcvariety.files.wordpress.com/2020/07/kanye-west-1-e1599269208476.jpg");
-
-        admin.getListings().add(l2);
+//        admin.getListings().add(l2);
 
         User user = new User("ultimateuser", null, null, null, null, "password", loc1);
         user.getRoles().add(new UserRoles(user, r2));

@@ -2,6 +2,7 @@
 
 ![Marketplace Database Layout](dbdiagram.png)
 [Link to Db Diagram](https://dbdiagram.io/d/5f66b8767da1ea736e2e8623)
+
 #USERS CRUD
 Method | Endpoint | Description | Required Data
 --- | --- | --- | ---
@@ -14,14 +15,14 @@ PUT | /changeuser/:userid | Updates/Changes an entire User | `username, password
 PUT | /users/:userid | Changes a specific field in User object | Whichever single String of `username, password, email, firstname, or lastname` needed
 DELETE | /users/:userid | Delete User based on userid
 
-## Listings CRUD
+## LISTINGS CRUD
 Method | Endpoint | Description | Required Data
 --- | --- | --- | ---
 POST | /todos/u/:userid/t/:title | Creates a new Todo List category for a specific User
 GET | /todos | Returns all Todo Lists and their associated Items
 GET | /todos/:todoid | Returns a specific Todo List by todoid and it's own associated Items
 PUT | /todos/:todoid/t/:title | Updates/Changes the title of an existing Todo List
-DELETE | /todos/:todoid | Deletes a Todo List and it's associated Items
+DELETE | /todos/:todoid | Deletes a Todo List and it's associated Ite ms
 ## Items CRUD
 Method | Endpoint | Description | Required Data
 --- | --- | --- | ---
