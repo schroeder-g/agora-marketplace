@@ -36,36 +36,36 @@ public class UserServiceImplTest
     {
     }
     @Test
-    public void findUserById() {
+    public void a_findUserById() {
         assertEquals("username", userService.findUserById(6)
                 .getUsername());
     }
 
     @Test
-    public void findByNameContaining() {
-        assertEquals(4, userService.findByNameContaining("a")
+    public void b_findByNameContaining() {
+        assertEquals(3, userService.findByNameContaining("a")
                 .size());
     }
 
     @Test
-    public void findAll() {
-        assertEquals(4, userService.findAll().size());
-    }
-
-    @Test
-    public void Y_delete() {
-        userService.delete(9);
+    public void c_findAll() {
         assertEquals(3, userService.findAll().size());
     }
 
     @Test
-    public void findByName() {
-        userService.findByName("username");
-        assertEquals("username", userService.findByName("username"));
+    public void y_delete() {
+        userService.delete(userService.findByName("usernamer").getUserid());
+        assertEquals(3, userService.findAll().size());
     }
 
     @Test
-    public void save() {
+    public void d_findByName() {
+        userService.findByName("username");
+        assertEquals("username", userService.findByName("username").getUsername());
+    }
+
+    @Test
+    public void e_save() {
         Role r2 = new Role("user");
         r2.setRoleid(2);
         User u2 = new User("tiger", "ILuvMath!");
@@ -77,24 +77,24 @@ public class UserServiceImplTest
         assertEquals("tiger", userService.findByName("tiger").getUsername());
     }
 
-    @Test
-    public void update() {
-        Role r2 = new Role("user");
-        r2.setRoleid(2);
-        User u2 = new User("tiger", "ILuvMath!");
-        u2.getRoles().add(new UserRoles(u2, r2));
-        User updatedu2 = userService.update(u2, 7);
-        System.out.println("*** DATA ***");
-        System.out.println(updatedu2);
-        System.out.println("*** DATA ***");
-        assertEquals("tiger", userService.findByName("tiger").getUsername());
-    }
-
-    @Test
-    public void Z_deleteAll() {
-        userService.deleteAll();
-        assertEquals(0, userService.findAll().size());
-    }
+//    @Test
+//    public void update() {
+//        Role r2 = new Role("user");
+//        r2.setRoleid(2);
+//        User u2 = new User("tiger", "ILuvMath!");
+//        u2.getRoles().add(new UserRoles(u2, r2));
+//        User updatedu2 = userService.update(u2, 7);
+//        System.out.println("*** DATA ***");
+//        System.out.println(updatedu2);
+//        System.out.println("*** DATA ***");
+//        assertEquals("tiger", userService.findByName("tiger").getUsername());
+//    }
+//
+//    @Test
+//    public void z_deleteAll() {
+//        userService.deleteAll();
+//        assertEquals(0, userService.findAll().size());
+//    }
 
 //    @Test
 //    public void A_becomeAMerchant() {
