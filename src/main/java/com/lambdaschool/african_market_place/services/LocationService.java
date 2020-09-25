@@ -8,17 +8,17 @@ import java.util.List;
 public interface LocationService {
     List<Location> getAllLocations();
 
-    Location findLocationByUserId(Long userId);
+    Location findLocationByUserId(long userId);
 
-    Location findLocationById(Long locationCode);
+    Location findLocationById(long locationCode);
 
-    Location findLocationByOrderId(Long orderCode);
+    Location findLocationByOrderId(long orderCode);
 
     Location save(Location location);
 
-    List<Location> findLocationByCityId(Long cityId);
+    List<Location> findLocationByCityId(long cityId);
 
-    void deleteLocationById(Long locationCode);
+    void deleteLocationById(long locationCode);
 
     void deleteAllLocations();
 

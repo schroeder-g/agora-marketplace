@@ -47,7 +47,7 @@ public class Location {
         return locationcode;
     }
 
-    public void setLocationcode(Long locationcode) {
+    public void setLocationcode(long locationcode) {
         this.locationcode = locationcode;
     }
 
