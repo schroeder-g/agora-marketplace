@@ -210,13 +210,13 @@ public class UserControllerTest {
 
     @Test
     public void addNewUser() throws Exception{
-        String apiUrl = "/users/user";
+        String apiUrl = "/users/register";
 
         // build a user
-        User u1 = new User();
-//        u1.setUserid(100);
-        u1.setUsername("derp");
-        u1.setPassword("ILuvSleep!");
+        User u1 = new User("derp", "password");
+        u1.setUserid(100);
+//        u1.setUsername("derp");
+//        u1.setPassword("ILuvSleep!");
 
         ObjectMapper mapper = new ObjectMapper();
         String userString = mapper.writeValueAsString(u1);
@@ -298,9 +298,17 @@ public class UserControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-//    @Test
-//    public void deleteUserSelf() {
-//    }
+    @Test
+    public void deleteUserSelf() throws Exception{
+        String apiUrl = "/users/user/{userid}";
+
+        RequestBuilder rb = MockMvcRequestBuilders.delete(apiUrl, "100")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+        mockMvc.perform(rb)
+                .andExpect(status().is2xxSuccessful())
+                .andDo(MockMvcResultHandlers.print());
+    }
 
 //    @Test
 //    public void getCurrentUserInfo() throws Exception{
