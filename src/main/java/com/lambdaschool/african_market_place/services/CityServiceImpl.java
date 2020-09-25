@@ -19,7 +19,7 @@ public class CityServiceImpl implements CityService
     CityRepository cityRepository;
 
     @Override
-    public City findCityById(Long cityCode) {
+    public City findCityById(long cityCode) {
         return cityRepository.findById(cityCode)
                 .orElseThrow(() -> new ResourceNotFoundException("Can't find that city!"));
     }

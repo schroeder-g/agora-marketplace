@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lambdaschool.african_market_place.AfricanMarketPlaceApplication;
 import com.lambdaschool.african_market_place.AfricanMarketPlaceApplicationTest;
 import com.lambdaschool.african_market_place.models.*;
+import com.lambdaschool.african_market_place.services.ListingService;
 import com.lambdaschool.african_market_place.services.UserService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
@@ -49,6 +50,7 @@ public class UserControllerTest {
 
     @MockBean
     private UserService userService;
+
 
     private List<User> userList;
     private List<Listing> listingList;

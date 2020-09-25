@@ -5,7 +5,7 @@ import com.lambdaschool.african_market_place.models.City;
 import java.util.List;
 
 public interface CityService {
-    City findCityById(Long cityCode);
+    City findCityById(long cityCode);
 
     List<City> findAllCities();
 

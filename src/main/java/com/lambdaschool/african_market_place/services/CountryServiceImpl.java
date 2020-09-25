@@ -22,7 +22,7 @@ public class CountryServiceImpl implements CountryService
     CityRepository cityRepository;
 
     @Override
-    public Country findCountryById(Long countrycode) throws
+    public Country findCountryById(long countrycode) throws
             ResourceNotFoundException
     {
         return countryRepository.findById(countrycode)

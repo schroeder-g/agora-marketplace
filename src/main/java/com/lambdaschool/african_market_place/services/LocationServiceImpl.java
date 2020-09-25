@@ -46,7 +46,7 @@ public class LocationServiceImpl implements LocationService
     }
 
     @Override
-    public Location findLocationById(Long locationCode) throws
+    public Location findLocationById(long locationCode) throws
             ResourceNotFoundException
     {
         Location location = locationRepository.findById(locationCode)
@@ -55,7 +55,7 @@ public class LocationServiceImpl implements LocationService
     }
 
     @Override
-    public Location findLocationByUserId(Long userId) throws
+    public Location findLocationByUserId(long userId) throws
             ResourceNotFoundException
     {
         User locationUser = userRepository.findById(userId)
@@ -65,7 +65,7 @@ public class LocationServiceImpl implements LocationService
     }
 
     @Override
-    public Location findLocationByOrderId(Long orderCode) throws
+    public Location findLocationByOrderId(long orderCode) throws
             ResourceNotFoundException
     {
         Order locationOrder = orderRepository.findById(orderCode)
@@ -74,7 +74,7 @@ public class LocationServiceImpl implements LocationService
     }
 
     @Override
-    public List<Location> findLocationByCityId(Long cityCode) throws
+    public List<Location> findLocationByCityId(long cityCode) throws
             ResourceNotFoundException
     {
         List<Location> cityLocations = new ArrayList<>();
@@ -114,12 +114,13 @@ public class LocationServiceImpl implements LocationService
     }
 
     @Override
-    public void deleteLocationById(Long locationCode) {
+    public void deleteLocationById(long locationCode) {
+        locationRepository.deleteById(locationCode);
 
     }
 
     @Override
     public void deleteAllLocations() {
-
+        locationRepository.deleteAll();
     }
 }

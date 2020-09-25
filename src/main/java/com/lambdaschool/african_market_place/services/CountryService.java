@@ -5,7 +5,7 @@ import com.lambdaschool.african_market_place.models.Country;
 import java.util.List;
 
 public interface CountryService {
-    Country findCountryById(Long countrycode);
+    Country findCountryById(long countrycode);
 
     List<Country> findAllCountries();
 
