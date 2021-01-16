@@ -1,6 +1,6 @@
 # backend
 
-![Marketplace Database Layout](dbdiagram.png)
+![Marketplace Database Layout](dbdiagram.PNG)
 [Link to Db Diagram](https://dbdiagram.io/d/5f66b8767da1ea736e2e8623)
 
 #USERS CRUD
